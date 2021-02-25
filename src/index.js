@@ -6,7 +6,7 @@ import Page from './page/Page'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App />    
     <Page/>
   </React.StrictMode>,
   document.getElementById('root')
