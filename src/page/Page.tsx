@@ -1,17 +1,12 @@
 
 import React from 'react'
+import AuthorizationForm from '../component/authorization/AuthorizationForm'
 
 
 export default () => {
     return(
         <div>
-            <ul>
-                <li>d</li>
-                <li>d</li>
-                <li>d</li>
-                <li></li>
-                <li></li>
-            </ul>
+            <AuthorizationForm namePlaceHolder = 'John' />
         </div>
     )
 }
