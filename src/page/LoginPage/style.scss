@@ -4,10 +4,9 @@
     display: flex;
     align-items: center;
     
-    .left{
+    .login_content{
         width: 50%;
         min-height: 100vh;
-        background-color: #11698e;
 
         display: flex;
         flex-direction: column;
@@ -19,20 +18,12 @@
         }
     }
 
+    .left{
+        background-color: #11698e;
+    }
+
     .right{
-        width: 50%;
-        min-height: 100vh;
         background-color: #f8f1f1;
-
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        >*{
-            margin: 10px 0;
-        }
     }
 
 }

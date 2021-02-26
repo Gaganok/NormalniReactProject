@@ -10,7 +10,7 @@ type LoginProps = {
 const LoginPage: React.FunctionComponent<LoginProps>  = ({}: LoginProps) =>{
     return(
         <div className='login_page'>
-            <div className='left'>
+            <div className='left login_content'>
                 <Typography>
                     Already Signed Up?
                 </Typography>
@@ -28,15 +28,7 @@ const LoginPage: React.FunctionComponent<LoginProps>  = ({}: LoginProps) =>{
                 </Button>
             </div>
 
-            <div className='right'>
-                <Typography>
-                    Sign Up for an Account 
-                </Typography>
-
-                <Typography>
-                    Lets get started!
-                </Typography>
-
+            <div className='right login_content'>
 
                 <RegistrationForm/>              
 
