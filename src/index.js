@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Page from './page/Page'
+import LoginPage from './page/LoginPage/Index'
 
 ReactDOM.render(
   <React.StrictMode>
     <App />    
-    <Page/>
+    <LoginPage/>
   </React.StrictMode>,
   document.getElementById('root')
 );

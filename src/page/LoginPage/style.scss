@@ -1,0 +1,29 @@
+
+.login_page{
+
+    display: flex;
+    // align-items: center;
+    
+    .login_content{
+        width: 50%;
+        min-height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        >*{
+            margin: 10px 0;
+        }
+    }
+
+    .left{
+        background-color: #11698e;
+    }
+
+    .right{
+        background-color: #f8f1f1;
+    }
+
+}
