@@ -1,68 +1,93 @@
-import { Button, Container, TextField, Typography } from '@material-ui/core'
-import React from 'react'
-import RegistrationForm from '../../component/authorization/RegistrationForm'
-import './style.scss'
+import { Button, Container, TextField, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import RegistrationForm from "../../component/authorization/RegistrationForm";
+import LoginForm from "../../component/authorization/LoginForm";
+import "./style.scss";
 
-type LoginProps = {
+type LoginProps = {};
 
-}
+// const loginFormRef: React.RefObject<HTMLDivElement> = React.createRef();
+// const slideFormRef: React.RefObject<HTMLDivElement> = React.createRef();
+// const registrationFormRef: React.RefObject<HTMLDivElement> = React.createRef();
 
-const LoginPage: React.FunctionComponent<LoginProps>  = ({}: LoginProps) =>{
-    return(
-        <div className='login_page'>
-            <div className='left login_content'>
-                <Typography>
-                    Already Signed Up?
-                </Typography>
+const LoginPage: React.FunctionComponent<LoginProps> = ({}: LoginProps) => {
+  const [isLogin, setLogin] = useState<boolean>(false);
+  const [classes, setClasses] = useState<any>({
+    registration: "right login_content",
+    login: "login_content login_form",
+    slide: "login_content left",
+  })
 
-                <Typography>
-                    Log in to your account so you can continue
-                    building and editing your stuff.
-                </Typography>
 
-                <Button 
-                    variant="contained" 
-                    size='small' 
-                    color='primary'>
-                    Log In
-                </Button>
-            </div>
+//   let classes = {
+//     registration: "right login_content",
+//     login: "login_content login_form",
+//     slide: "login_content left",
+//   };
 
-            <div className='right login_content'>
+  
 
-                <RegistrationForm/>              
+  function runAnimation(): void {
+    const currentLoginState = !isLogin;
 
-            </div>
-        </div>
-    )
-}  
+    console.log(classes)
+
+    setClasses(currentLoginState
+      ? {
+          registration: "right login_content hide",
+          login: "login_content login_form show",
+          slide: "login_content left slide_right",
+        }
+      : {
+          registration: "right login_content show",
+          login: "login_content login_form hide",
+          slide: "login_content left slide_left",
+        });
+
+
+    console.log(classes)
+    setLogin(currentLoginState);
+
+    // const loginDiv: HTMLDivElement = loginFormRef.current
+    // const slideDiv: HTMLDivElement = slideFormRef.current
+    // const registrationDiv: HTMLDivElement = registrationFormRef.current
+
+    // loginDiv
+  }
+
+  return (
+    <div className="login_page">
+      <div className={classes["login"]}>
+        <LoginForm />
+      </div>
+
+      <div className={classes["slide"]}>
+        <Typography>Already Signed Up?</Typography>
+
+        <Typography>
+          Log in to your account so you can continue building and editing your
+          stuff.
+        </Typography>
+
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            console.log("ddd");
+            runAnimation();
+          }}
+        >
+          Log In
+        </Button>
+   
+      </div>
+
+      <div className={classes["registration"]}>
+        <RegistrationForm />
+      </div>
+    </div>
+  );
+};
 
 export default LoginPage;
-
-// {
-//     /*
-//     LeftSide:{
-//         <Typography Title>Already Signed Up </Typography>
-//         <Typography Captcha> ... </Typography>
-//         <Button>Log In</Button>
-//     }
-//     RightSide:{
-//         <Typography Title>Sign Up for an Account</Typography>
-//         <Typography Captcha>...</Typography>
-//         <RegistrationForm> {
-//             firsname surname
-//             username
-//             email
-//             password
-//             accept term and condition 
-//             <Button>
-//         }
-//         <GoogleFacebookTwitter>
-
-
-//         <Button>Log In</Button>
-//     }
-
-
-//     */
-// }
