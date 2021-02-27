@@ -35,21 +35,6 @@
     
         position: relative;
     }
-    
-    @keyframes slide_right {
-        from {transform: translate(0px, 0px);}
-        to {transform: translate(calc(100%), 0px);}
-    }
-
-    @keyframes slide_left {
-        from {transform: translate(calc(100%), 0px);}
-        to {transform: translate(0px, 0px);}
-    }   
-    
-    @keyframes potushi {
-        0% {opacity: 0}
-        50% {opacity: 1}
-    }
 
     .right{
         background-color: #f8f1f1;
@@ -65,12 +50,26 @@
         transition: 1s;
     }
 
+    .preload{
+        animation-duration: 0s !important;
+    }
+
     .slide_right{
         animation: slide_right 1s linear 1 forwards;
+
+        @keyframes slide_right {
+            from {transform: translate(0px, 0px);}
+            to {transform: translate(calc(100%), 0px);}
+        }
     }
 
     .slide_left{
         animation: slide_left 1s linear 1 forwards;
+
+        @keyframes slide_left {
+            from {transform: translate(calc(100%), 0px);}
+            to {transform: translate(0px, 0px);}
+        }
     }
 
 }
