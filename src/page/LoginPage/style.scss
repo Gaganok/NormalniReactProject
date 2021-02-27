@@ -2,8 +2,7 @@
 .login_page{
 
     display: flex;
-    // align-items: center;
-    
+
     .login_content{
         width: 50%;
         min-height: 100vh;
@@ -16,14 +15,61 @@
         >*{
             margin: 10px 0;
         }
+    }   
+    
+    .login_form{
+        background-color: #f8f1f1;
+        height: 100%;
+        width: 50%;
+        z-index: -3;
+    
+        position: absolute;
+        opacity: 0;
     }
 
     .left{
         background-color: #11698e;
+        height: 100%;
+        width: 50%;
+        z-index: 1;
+    
+        position: relative;
     }
 
     .right{
         background-color: #f8f1f1;
+    }
+
+    .hide{
+        opacity: 0;
+        transition: 1s;
+    }
+
+    .show{
+        opacity: 1;
+        transition: 1s;
+    }
+
+    .preload{
+        animation-duration: 0s !important;
+    }
+
+    .slide_right{
+        animation: slide_right 1s linear 1 forwards;
+
+        @keyframes slide_right {
+            from {transform: translate(0px, 0px);}
+            to {transform: translate(calc(100%), 0px);}
+        }
+    }
+
+    .slide_left{
+        animation: slide_left 1s linear 1 forwards;
+
+        @keyframes slide_left {
+            from {transform: translate(calc(100%), 0px);}
+            to {transform: translate(0px, 0px);}
+        }
     }
 
 }

@@ -2,23 +2,22 @@ import React from 'react'
 import { Container, Grid, Input, InputProps, Paper, TextField, Typography } from '@material-ui/core';
 
 
-
-type AuthorizationProps = {
-    namePlaceHolder: string,
-    passwordPlaceHolder?: string
+type LoginProps = {
+    // namePlaceHolder: string,
+    // passwordPlaceHolder?: string
 }
 
-export default ({namePlaceHolder, passwordPlaceHolder}: AuthorizationProps) => {
+export default ({}: LoginProps) => {
 
     let inputProps: InputProps = {
         color: 'primary',
-        placeholder: namePlaceHolder
+        // placeholder: namePlaceHolder
     }
 
     return(
         <div>
             <Container maxWidth="xs">
-                <Paper elevation={12}>
+                {/* <Paper elevation={12}> */}
                     <Grid container alignContent='center' spacing={3} alignItems="flex-start" direction="column" >                    
                         <Grid item>
                             <Typography align='center' color='primary' variant='h3'>
@@ -35,7 +34,7 @@ export default ({namePlaceHolder, passwordPlaceHolder}: AuthorizationProps) => {
                             <TextField id="grid_input_password" label="Password" type='password' />
                         </Grid>
                     </Grid>
-                </Paper>
+                {/* </Paper> */}
             </Container>
         </div>
     )
