@@ -1,6 +1,51 @@
+$primaryColor: #0e49b5;
+$secondaryColor: #f8f1f1;
+$slideAnimationTime: 0.7s;
+$slideAnimationScale: 1.02;
+
+
+$slideSkew: 7deg;
+
+
+
+
+@mixin skew($side){
+    @if $side == left {
+        margin-left:5%;
+    }
+
+    position: relative;
+    background-color: $primaryColor;
+
+    z-index: 999;
+    
+    &::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: $primaryColor;
+        transform-origin: bottom left;
+
+        @if $side == left {
+            transform: skew($slideSkew, 0deg);
+        }
+        @else if $side == right {
+            transform: skew(-$slideSkew, 0deg);
+        }
+    }
+}
+
+.left_skew{
+    @include skew('left');
+}
+
+.right_skew{
+    @include skew('right');
+}
 
 .login_page{
-
     display: flex;
 
     .login_content{
@@ -18,26 +63,16 @@
     }   
     
     .login_form{
-        background-color: #f8f1f1;
+        background-color: $secondaryColor;
         height: 100%;
         width: 50%;
-        z-index: -3;
     
         position: absolute;
         opacity: 0;
     }
 
-    .left{
-        background-color: #11698e;
-        height: 100%;
-        width: 50%;
-        z-index: 1;
-    
-        position: relative;
-    }
-
     .right{
-        background-color: #f8f1f1;
+        background-color: $secondaryColor;
     }
 
     .hide{
@@ -55,21 +90,47 @@
     }
 
     .slide_right{
-        animation: slide_right 1s linear 1 forwards;
+        animation: slide_right $slideAnimationTime ease-in 1 forwards;
 
         @keyframes slide_right {
-            from {transform: translate(0px, 0px);}
-            to {transform: translate(calc(100%), 0px);}
+            0% {
+                transform: translate(0px, 0px);
+            }
+    
+            70% {
+                transform: translate(calc(100%), 0px);
+            }
+            
+            85% {
+                transform: translate(calc(100%), 0px) scale3d($slideAnimationScale, 1, 1);
+            }
+
+            100%{
+                transform: translate(calc(100%), 0px) scale3d(1, 1, 1);
+            }
         }
     }
 
     .slide_left{
-        animation: slide_left 1s linear 1 forwards;
+        // animation: slide_left 1s linear 1 forwards;
+        animation: slide_left $slideAnimationTime ease-in 1 forwards;
 
         @keyframes slide_left {
-            from {transform: translate(calc(100%), 0px);}
-            to {transform: translate(0px, 0px);}
+            0% {
+                transform: translate(calc(100%), 0px);
+            }
+            
+            70% {
+                transform: translate(0px, 0px);
+            }
+            
+            85% {
+                transform: scale3d($slideAnimationScale, 1, 1);
+            }
+
+            100%{
+                transform: scale3d(1, 1, 1);
+            }
         }
     }
-
 }
