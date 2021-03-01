@@ -20,9 +20,7 @@ export default ({title = 'Title', caption = 'caption', buttonText = 'Button', ..
         slide_classes.concat(' slide_right left_skew '):
         slide_classes.concat(' slide_left right_skew ')
     }
-
-    console.log(slide_classes)
-
+    
   return (
     <div
       className={slide_classes}

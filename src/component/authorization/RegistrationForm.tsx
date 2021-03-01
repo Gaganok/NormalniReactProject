@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,14 +68,16 @@ export default () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              size='large'
-              color="primary"
-              fullWidth
-            >
-              Submit
-            </Button>
+            <Link to='/admin'>
+              <Button
+                variant="contained"
+                size='large'
+                color="primary"
+                fullWidth
+              >
+                Submit
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Container>

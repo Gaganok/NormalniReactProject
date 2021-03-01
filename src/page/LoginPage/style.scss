@@ -3,11 +3,7 @@ $secondaryColor: #f8f1f1;
 $slideAnimationTime: 0.7s;
 $slideAnimationScale: 1.02;
 
-
 $slideSkew: 7deg;
-
-
-
 
 @mixin skew($side){
     @if $side == left {
@@ -16,6 +12,8 @@ $slideSkew: 7deg;
 
     position: relative;
     background-color: $primaryColor;
+
+    padding: 0 5%;
 
     z-index: 999;
     

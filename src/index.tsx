@@ -4,22 +4,21 @@ import './index.css';
 import LoginPage from './page/LoginPage/Index'
 import AdminPanel from './page/AdminPanelPage/Index'
 import Test from './page/AdminPanelPage/Test'
-import { BrowserRouter, Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Router, Switch, Route } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <AdminPanel>
         <Switch>
-          <Route exact path='/login'>
+          <Route exact path='/'>
             <LoginPage/>
           </Route>
-          <Route path='/admin'>
-            <AdminPanel>
-              <Test/>
-            </AdminPanel>
+          <Route path='/test'>
+            <Test/>
           </Route>
-          <Redirect exact from='' to='/login'/>
         </Switch>
+      </AdminPanel>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
