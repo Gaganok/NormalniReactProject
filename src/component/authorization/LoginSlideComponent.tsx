@@ -11,20 +11,16 @@ type SliderProps = {
 };
 
 export default ({title = 'Title', caption = 'caption', buttonText = 'Button', ...props}: SliderProps) => {
-    let slide_classes = 'login_content '
+    let slide_classes = ' container__content '
     if(props.isPreload){ 
-        slide_classes = slide_classes.concat(' right_skew ')
+      slide_classes = slide_classes.concat(' container__skew--right ')
     } else {
-        slide_classes = props.isLogin ? 
-        
-        slide_classes.concat(' slide_right left_skew '):
-        slide_classes.concat(' slide_left right_skew ')
+      const side: string = props.isLogin ? 'right' : 'left';
+      slide_classes = slide_classes.concat(` container__skew--${side} left container__slide--${side} `);
     }
     
   return (
-    <div
-      className={slide_classes}
-    >
+    <div className={slide_classes}>
       <Typography>{title}</Typography>
       <Typography>{caption}</Typography>
       <Button

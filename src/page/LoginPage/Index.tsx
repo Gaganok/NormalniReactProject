@@ -12,37 +12,40 @@ const LoginPage: React.FunctionComponent<LoginProps> = ({}: LoginProps) => {
   const [isPreload, setPreload] = useState<boolean>(true);
 
   const slideProps = {
-    isLogin, isPreload,
-    slideClickCallback:() => {
-      isPreload && setPreload(false)
-      setLogin(!isLogin)
-    }
-  }
-
+    isLogin,
+    isPreload,
+    slideClickCallback: () => {
+      isPreload && setPreload(false);
+      setLogin(!isLogin);
+    },
+  };
 
   return (
-    <div className="login_page">
-      <div className={`login_content login_form ${isLogin ? 'show' : 'hide'}`}>
+    <div className="container">
+      <div
+        className={`container__content container__content--absolute container__content--${isLogin ? "shown" : "hidden"}`}
+      >
         <LoginForm />
       </div>
 
-      {
-        isLogin || isPreload ? 
-        <LoginSlideComponent 
-          title='Already Signed Up?'
-          caption='Log in to your account so you can continue building and editing your stuff.'
-          buttonText='Log In'
-          {...slideProps}
-        /> :
-        <LoginSlideComponent 
-          title="Don't Have an Account Yet?"
-          caption="Let's get you all set up so you can start creating your first onboarding experience"
-          buttonText='Sign Up'
+      {isLogin || isPreload ? (
+        <LoginSlideComponent
+          title="Already Signed Up?"
+          caption="Log in to your account so you can continue building and editing your stuff."
+          buttonText="Log In"
           {...slideProps}
         />
-      }
-      
-      <div className={`right login_content ${isLogin ? 'hide' : 'show'}`}>
+      ) : (
+        <LoginSlideComponent
+          title="Don't Have an Account Yet?"
+          caption="Let's get you all set up so you can start creating your first onboarding experience"
+          buttonText="Sign Up"
+          {...slideProps}
+        />
+      )}
+
+      {/* <div className={`right login_content ${isLogin ? "hide" : "show"}`}> */}
+      <div className={`container__content container__content--${!isLogin ? "shown" : "hidden"}`}>
         <RegistrationForm />
       </div>
     </div>
