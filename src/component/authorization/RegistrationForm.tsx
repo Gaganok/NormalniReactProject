@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import {
   Button,
@@ -8,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {Link} from 'react-router-dom'
+import SocialIcons from "../social/SocialIcons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +81,7 @@ export default () => {
               </Button>
             </Link>
           </Grid>
+          <SocialIcons/>
         </Grid>
       </Container>
     </div>

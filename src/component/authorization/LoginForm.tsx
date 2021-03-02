@@ -1,34 +1,53 @@
-import React from 'react'
-import { Container, Grid, Input, InputProps, Paper, TextField, Typography } from '@material-ui/core';
+/* eslint-disable import/no-anonymous-default-export */
+import React from "react";
+import {
+  Container,
+  Grid,
+  Input,
+  InputProps,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import SocialIcons from "../social/SocialIcons";
 
-type LoginProps = {}
+type LoginProps = {};
 
 export default ({}: LoginProps) => {
+  let inputProps: InputProps = {
+    color: "primary",
+  };
 
-    let inputProps: InputProps = {
-        color: 'primary',
-    }
+  return (
+    <div>
+      <Container maxWidth="xs">
+        <Grid
+          container
+          alignContent="center"
+          spacing={3}
+          alignItems="flex-start"
+          direction="column"
+        >
+          <Grid item>
+            <Typography align="center" color="primary" variant="h3">
+              Login
+            </Typography>
+          </Grid>
 
-    return(
-        <div>
-            <Container maxWidth="xs">
-                <Grid container alignContent='center' spacing={3} alignItems="flex-start" direction="column" >                    
-                    <Grid item>
-                        <Typography align='center' color='primary' variant='h3'>
-                            Login
-                        </Typography>
-                    </Grid>
+          <Grid item>
+            <TextField id="grid_input_username" label="User Name" />
+          </Grid>
 
-                    <Grid item>
-                        <TextField id="grid_input_username" label="User Name" />
-                    </Grid>
-
-                    <Grid item >
-                        <TextField id="grid_input_password" label="Password" type='password' />
-                    </Grid>
-                </Grid>
-            </Container>
-        </div>
-    )
-}
-
+          <Grid item>
+            <TextField
+              id="grid_input_password"
+              label="Password"
+              type="password"
+            />
+          </Grid>
+          <SocialIcons />
+        </Grid>
+      </Container>
+    </div>
+  );
+};
