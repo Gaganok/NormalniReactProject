@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import {Button,Typography,} from "@material-ui/core";
 
@@ -13,7 +14,7 @@ type SliderProps = {
 export default ({title = 'Title', caption = 'caption', buttonText = 'Button', ...props}: SliderProps) => {
     let slide_classes = ' container__content '
     if(props.isPreload){ 
-      slide_classes = slide_classes.concat(' container__skew--right ')
+      slide_classes = slide_classes.concat(' container__skew--left ')
     } else {
       const side: string = props.isLogin ? 'right' : 'left';
       slide_classes = slide_classes.concat(` container__skew--${side} left container__slide--${side} `);
