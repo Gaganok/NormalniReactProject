@@ -3,19 +3,17 @@ $secondaryColor: #f8f1f1;
 $slideAnimationTime: 0.7s;
 $slideAnimationScale: 1.02;
 
-
 $slideSkew: 7deg;
 
-
-
-
 @mixin skew($side){
-    @if $side == left {
+    @if $side == right {
         margin-left:5%;
     }
 
     position: relative;
     background-color: $primaryColor;
+
+    padding: 0 5%;
 
     z-index: 999;
     
@@ -28,27 +26,38 @@ $slideSkew: 7deg;
         background: $primaryColor;
         transform-origin: bottom left;
 
-        @if $side == left {
+        @if $side == right {
             transform: skew($slideSkew, 0deg);
         }
-        @else if $side == right {
+        @else if $side == left {
             transform: skew(-$slideSkew, 0deg);
         }
     }
 }
 
-.left_skew{
-    @include skew('left');
-}
-
-.right_skew{
-    @include skew('right');
-}
-
-.login_page{
+.container{
     display: flex;
 
-    .login_content{
+    &__content{
+        &--hidden{
+            opacity: 0; 
+        }
+
+        &--shown{
+            opacity: 1; 
+        }
+
+        &--initail{
+            animation-duration: 0s !important;
+        }
+
+        &--absolute{
+            position: absolute;
+        }
+
+        transition: opacity 1s;
+        background-color: $secondaryColor;
+
         width: 50%;
         min-height: 100vh;
 
@@ -58,78 +67,38 @@ $slideSkew: 7deg;
         justify-content: center;
 
         >*{
-            margin: 10px 0;
+            margin: 10px 0 !important;
         }
-    }   
-    
-    .login_form{
-        background-color: $secondaryColor;
-        height: 100%;
-        width: 50%;
-    
-        position: absolute;
-        opacity: 0;
-    }
+    }  
 
-    .right{
-        background-color: $secondaryColor;
-    }
+    &__skew{
+        &--right{
+            @include skew('right');
+        }
 
-    .hide{
-        opacity: 0;
-        transition: 1s;
-    }
-
-    .show{
-        opacity: 1;
-        transition: 1s;
-    }
-
-    .preload{
-        animation-duration: 0s !important;
-    }
-
-    .slide_right{
-        animation: slide_right $slideAnimationTime ease-in 1 forwards;
-
-        @keyframes slide_right {
-            0% {
-                transform: translate(0px, 0px);
-            }
-    
-            70% {
-                transform: translate(calc(100%), 0px);
-            }
-            
-            85% {
-                transform: translate(calc(100%), 0px) scale3d($slideAnimationScale, 1, 1);
-            }
-
-            100%{
-                transform: translate(calc(100%), 0px) scale3d(1, 1, 1);
-            }
+        &--left{
+            @include skew('left');
         }
     }
 
-    .slide_left{
-        // animation: slide_left 1s linear 1 forwards;
-        animation: slide_left $slideAnimationTime ease-in 1 forwards;
+    &__slide{
+        &--right{
+            animation: slide_right $slideAnimationTime ease-in 1 forwards;
+            @keyframes slide_right {
+                0% {transform: translate(0px, 0px)}
+                70% {transform: translate(calc(100%), 0px)}
+                85% {transform: translate(calc(100%), 0px) scale3d($slideAnimationScale, 1, 1)}
+                100%{transform: translate(calc(100%), 0px) scale3d(1, 1, 1)}
+            }
+        }
 
-        @keyframes slide_left {
-            0% {
-                transform: translate(calc(100%), 0px);
-            }
-            
-            70% {
-                transform: translate(0px, 0px);
-            }
-            
-            85% {
-                transform: scale3d($slideAnimationScale, 1, 1);
-            }
-
-            100%{
-                transform: scale3d(1, 1, 1);
+        &--left{
+            animation: slide_left $slideAnimationTime ease-in 1 forwards; //$slideAnimationTime
+            @keyframes slide_left {
+                0% {transform: translate(calc(100%), 0px)}
+                70% {transform: translate(0px, 0px)}
+                85% {transform: scale3d($slideAnimationScale, 1, 1)}
+                100%{transform: scale3d(1, 1, 1)}
             }
         }
     }
