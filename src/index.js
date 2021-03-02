@@ -4,6 +4,7 @@ import './index.css';
 import LoginPage from './page/LoginPage/Index'
 import AdminPanel from './page/AdminPanelPage/Index'
 import Test from './page/AdminPanelPage/Test'
+import BunkerPage from './page/BunkerPage/Index'
 import { BrowserRouter, Router, Switch, Route, Redirect } from 'react-router-dom';
 
 ReactDOM.render(
@@ -18,7 +19,16 @@ ReactDOM.render(
               <Test/>
             </AdminPanel>
           </Route>
-          <Redirect exact from='' to='/login'/>
+          <Route path='/admin/bunker'>
+            <AdminPanel>
+              <BunkerPage/>
+            </AdminPanel>
+          </Route>
+          <Route path='/bunker'>
+            <BunkerPage/>
+          </Route>
+          {/* <Redirect exact from='' to='/login'/> */}
+          <Redirect exact from='' to='/bunker'/>
         </Switch>
     </BrowserRouter>
   </React.StrictMode>,

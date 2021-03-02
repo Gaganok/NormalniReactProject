@@ -43,8 +43,7 @@ const LoginPage: React.FunctionComponent<LoginProps> = ({}: LoginProps) => {
           {...slideProps}
         />
       )}
-
-      {/* <div className={`right login_content ${isLogin ? "hide" : "show"}`}> */}
+      
       <div className={`container__content container__content--${!isLogin ? "shown" : "hidden"}`}>
         <RegistrationForm />
       </div>
