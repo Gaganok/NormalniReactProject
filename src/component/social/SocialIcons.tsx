@@ -8,33 +8,31 @@ import "../../css/style.scss";
 
 export default () => {
   return (
-    <nav className="container">
-      <ul className="socials">
-        <li className="socials__item">
-          <NavLink className="socials__link" to="#">
-            <FacebookIcon
-              className="socials__icon socials__icon--fb"
-              fontSize="large"
-            />
-          </NavLink>
-        </li>
-        <li className="socials__item">
-          <NavLink className="socials__link" to="#">
-            <TwitterIcon
-              className="socials__icon socials__icon--tw"
-              fontSize="large"
-            />
-          </NavLink>
-        </li>
-        <li className="socials__item">
-          <NavLink className="socials__link" to="#">
-            <InstagramIcon
-              className="socials__icon socials__icon--inst"
-              fontSize="large"
-            />
-          </NavLink>
-        </li>
-      </ul>
-    </nav>
+    <ul className="socials">
+      <li className="socials__item">
+        <NavLink className="socials__link" to="#">
+          <FacebookIcon
+            className="socials__icon socials__icon--fb"
+            fontSize="large"
+          />
+        </NavLink>
+      </li>
+      <li className="socials__item">
+        <NavLink className="socials__link" to="#">
+          <TwitterIcon
+            className="socials__icon socials__icon--tw"
+            fontSize="large"
+          />
+        </NavLink>
+      </li>
+      <li className="socials__item">
+        <NavLink className="socials__link" to="#">
+          <InstagramIcon
+            className="socials__icon socials__icon--inst"
+            fontSize="large"
+          />
+        </NavLink>
+      </li>
+    </ul>
   );
 };

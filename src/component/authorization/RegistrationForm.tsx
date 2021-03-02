@@ -81,7 +81,9 @@ export default () => {
               </Button>
             </Link>
           </Grid>
-          <SocialIcons/>
+          <Grid item xs={12}>
+            <SocialIcons/>
+          </Grid>
         </Grid>
       </Container>
     </div>

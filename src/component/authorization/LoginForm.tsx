@@ -25,7 +25,6 @@ export default ({}: LoginProps) => {
           container
           alignContent="center"
           spacing={3}
-          alignItems="flex-start"
           direction="column"
         >
           <Grid item>
@@ -35,7 +34,7 @@ export default ({}: LoginProps) => {
           </Grid>
 
           <Grid item>
-            <TextField id="grid_input_username" label="User Name" />
+            <TextField id="grid_input_username" label="User Name" fullWidth/>
           </Grid>
 
           <Grid item>
@@ -43,9 +42,12 @@ export default ({}: LoginProps) => {
               id="grid_input_password"
               label="Password"
               type="password"
+              fullWidth
             />
           </Grid>
-          <SocialIcons />
+          <Grid item>
+            <SocialIcons />
+          </Grid>
         </Grid>
       </Container>
     </div>
