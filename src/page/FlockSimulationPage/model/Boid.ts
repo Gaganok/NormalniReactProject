@@ -3,21 +3,31 @@ import { Vector3 } from "three";
 
 class Boid{
     constructor(
-        public position: Vector3  = new Vector3(0, 0, 0),
-        public velocity: Vector3  = new Vector3(0, 0, 0),
-        public acceleration: Vector3 = new Vector3(0, 0, 0),
-        public maxSpeed: Vector3 = new Vector3(1, 1, 1),
-        public maxForce: Vector3 = new Vector3(0.01, 0.01, 0.01),
+        public position: Vector3  = new Vector3(),
+        public velocity: Vector3  = new Vector3(),
+        public acceleration: Vector3 = new Vector3(),
+        public maxSpeed: Vector3 = new Vector3().addScalar(2),
+        public maxForce: Vector3 = new Vector3().addScalar(0.01),
     ){}
 
     steer(target: Vector3){
-        let des =new Vector3()
+        let des = new Vector3()
         .copy(target)
         .sub(this.position)
 
+        const distance = this.position.distanceTo(target) + 0.00001
+
+        // this.maxSpeed.subScalar(distance / this.maxSpeed.x)
+        const maxSpeedArrival = this.maxSpeed.clone()
+        .subScalar(this.maxSpeed.x / distance)
+        .max(new Vector3())
+        .min(this.maxSpeed)
+
         des.normalize()
-        des.multiply(this.maxSpeed)
+        des.multiply(maxSpeedArrival)
         des.sub(this.velocity)
+
+        
 
         const max = new Vector3().copy(this.maxForce)
         const min = new Vector3().copy(this.maxForce).multiplyScalar(-1)
@@ -25,9 +35,6 @@ class Boid{
         des.clamp(min, max)
 
         this.applyForce(des)
-        
-        
-        
     }
 
     applyForce(force: Vector3){
