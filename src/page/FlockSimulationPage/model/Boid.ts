@@ -20,8 +20,7 @@ class Boid{
         // this.maxSpeed.subScalar(distance / this.maxSpeed.x)
         const maxSpeedArrival = this.maxSpeed.clone()
         .subScalar(this.maxSpeed.x / distance)
-        .max(new Vector3())
-        .min(this.maxSpeed)
+        // .clamp(new Vector3(), this.maxSpeed)
 
         des.normalize()
         des.multiply(maxSpeedArrival)

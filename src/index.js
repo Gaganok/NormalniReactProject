@@ -6,6 +6,7 @@ import AdminPanel from './page/AdminPanelPage/Index'
 import Test from './page/AdminPanelPage/Test'
 import BunkerPage from './page/BunkerPage/Index'
 import FlockPage from './page/FlockSimulationPage/Index'
+import AdminDashboard from './page/AdminDashboardPage/Index'
 import { BrowserRouter, Router, Switch, Route, Redirect } from 'react-router-dom';
 
 ReactDOM.render(
@@ -32,6 +33,9 @@ ReactDOM.render(
           </Route>
           <Route path='/bunker'>
             <BunkerPage/>
+          </Route>
+          <Route path='/dashboard'>
+            <AdminDashboard/>
           </Route>
           {/* <Redirect exact from='' to='/login'/> */}
           <Redirect exact from='' to='/flock'/>
