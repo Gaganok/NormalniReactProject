@@ -5,7 +5,7 @@ export default class Geometry{
     private static ENV_CUBE_SCALE: number = 20;
     private static ENV_SPHERE_SCALE: number = 15;
 
-    static BoidConeGeometry = new THREE.ConeBufferGeometry().rotateX(Math.PI / 2)
+    static BoidConeGeometry = new THREE.ConeBufferGeometry().scale(1, 3, 1).rotateX(Math.PI / 2)
     static EnvCubeGeometry = new BoxBufferGeometry().scale(Geometry.ENV_CUBE_SCALE, Geometry.ENV_CUBE_SCALE, Geometry.ENV_CUBE_SCALE);
     static EnvSphereGeometry = new SphereBufferGeometry().scale(Geometry.ENV_SPHERE_SCALE, Geometry.ENV_SPHERE_SCALE, Geometry.ENV_SPHERE_SCALE)
 
