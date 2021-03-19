@@ -1,0 +1,60 @@
+
+.sticky{
+
+
+    // &:first-child{
+
+    // }
+
+    // &:last-child{
+
+    // }
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    height: 100%;
+
+    padding: 1rem;
+
+    background-color: blue;
+
+    display: flex;
+    flex-direction: column;
+
+    .menu--upper{
+        display: flex;
+        flex: 1;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgb(63, 48, 150);
+    }
+
+    .menu--lower{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex: 3;
+        justify-content: space-between;
+    }
+
+    .menu__content{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.icon__item{
+    color: white;
+}
+
+.MuiIcon-fontSizeInherit{
+    font-size: 90px;
+}
+
+.MuiSvgIcon-root{
+    font-size: 2.3rem !important;
+    color: white;
+}

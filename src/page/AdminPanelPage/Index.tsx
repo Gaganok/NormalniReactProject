@@ -99,10 +99,15 @@ export default function MiniDrawer(props: React.PropsWithChildren<Props>) {
   const [open, setOpen] = React.useState(true);
   const menuItems: Array<MenuItem> = [
     {
-        icon: <AccessibleForwardIcon/>,
-        text: "Login",
-        to: "/"
-    }
+      icon: <AccessibleForwardIcon/>,
+      text: "Login",
+      to: "/"
+    },
+    {
+      icon: <AccessibleForwardIcon/>,
+      text: "Flock",
+      to: "/flock"
+    }, 
   ]
 
   return (

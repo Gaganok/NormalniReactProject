@@ -1,28 +1,36 @@
-import React from "react";
-import BunkerCardComponent from "../../component/bunker/BunkerCardComponent";
-import BunkerCard from "../../component/bunker/model/BunkerCard";
+import React, { useEffect, useState } from "react";
+import BunkerCard from "../../component/bunker/BunkerCard";
+import BunkerCardModel from "../../component/bunker/model/BunkerCardModel";
+import BunkerJobCardModel from "../../component/bunker/model/BunkerJobCardModel";
+import BunkerUtils from "../../component/bunker/utils/BunkerUtils";
+import BunkerBaggageCardModel from "../../component/bunker/model/BunkerBaggageCardModel";
+import BunkerCardGenerator from "../../component/bunker/service/BunkerCardGenerator";
 
 export interface BunkerProps {
-    cards?: Array<BunkerCard>
+    cards?: Array<BunkerCardModel>
 }
  
 const Bunker: React.SFC<BunkerProps> = ({cards} : BunkerProps) => {
 
-    if(cards == null){
-        cards = [
-            new BunkerCard(),
-            new BunkerCard("New Card", "Supa-Dupa Card")
-        ]
-    }
+    const [cardsArray, setCards] = useState(new Array<BunkerCardModel>())
+
+    // if(cards == null){
+    //     cards = [
+    //         new BunkerJobCardModel(),
+    //         new BunkerBaggageCardModel()
+    //     ]
+    // }
+
+    useEffect(() => {
+        BunkerCardGenerator.generate(setCards)
+    }, [])   
     
-    console.log(cards)
-
-
+    console.log(cardsArray)
 
     return ( 
-        <div style={{display:'flex', justifyContent:'space-around'}}>
+        <div style={{display:'flex', justifyContent:'space-around', flexWrap: 'wrap', alignContent:'space-between'}}>
             {
-                cards.map((card, index) => <BunkerCardComponent key={index} card={card}/>)
+                cardsArray && cardsArray.map((card, index) => <BunkerCard key={index} card={card} color={BunkerUtils.getColor(card.type)}/>)
             }
         </div> 
     );
