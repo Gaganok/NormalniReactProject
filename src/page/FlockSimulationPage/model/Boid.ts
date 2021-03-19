@@ -1,14 +1,27 @@
 import { Vector3 } from "three";
 
+type Mesh = THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>
+
 class Boid{
-    constructor(
-        public position: Vector3  = new Vector3(),
-        public velocity: Vector3  = new Vector3(),
-        public maxSpeed: Vector3 = new Vector3().addScalar(0.3),
-        public maxForce: Vector3 = new Vector3().addScalar(0.01),
-        public target: Vector3 = new Vector3(),
-        public mesh?: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>
-    ){}
+    public position: Vector3  = new Vector3()
+    public velocity: Vector3  = new Vector3()
+    public maxSpeed: Vector3 = new Vector3().addScalar(0.1)
+    public maxForce: Vector3 = new Vector3().addScalar(0.01)
+    public target: Vector3 = new Vector3()
+    public mesh?: Mesh
+
+
+    constructor()
+    constructor(mesh: Mesh); 
+    constructor(mesh?: Mesh){
+        if(mesh != null){
+            this.position = mesh.position
+            this.mesh = mesh
+            this.target = new Vector3(2, 2, 0)
+            // this.target = mesh.position.clone().addScalar(1)
+            // this.position.
+        }
+    }
 
     steer(): Vector3{
         let acceleration = this.target.clone()

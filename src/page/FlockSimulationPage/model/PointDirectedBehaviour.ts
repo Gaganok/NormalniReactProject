@@ -4,13 +4,12 @@ import Boid from "./Boid";
 import BoidUtils from "./BoidUtils";
 
 export default class PointDirectedBehaviour implements Behaviour{
-    private targetVector: Vector3 = new Vector3;
+    private readonly REFRACTION_DISTANCE = 2
 
     updateTarget(boid: Boid): boolean {
-        const REFRACTION_DISTANCE = 2
         const distance = boid.position.distanceTo(boid.target)
-
-        const targetUpdated = distance < REFRACTION_DISTANCE
+        const targetUpdated = distance < this.REFRACTION_DISTANCE
+        
         if(targetUpdated){
             const newDirectionVector = new Vector3()
             .addScalar(1)

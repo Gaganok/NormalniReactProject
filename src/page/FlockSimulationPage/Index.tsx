@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as THREE from 'three'
-import { Vector3 } from 'three'
+import { BufferAttribute, Vector3 } from 'three'
 import Geometry from './model/Geometry'
 import Material from './model/Material'
 import * as GUI from 'dat.gui';
@@ -12,16 +12,16 @@ import World from './model/World';
 import Behaviour from './model/Behaviour';
 import PointDirectedBehaviour from './model/PointDirectedBehaviour';
 import Stats from 'stats.js';
+import CentrifugalBehaviour from './model/CentrifugalBehaviour';
+import Line from './model/Line';
 
 export interface FlockProps {}
 
-// const BOIDS = new Array<THREE.Mesh>()
-// const boid: Boid = new Boid();
 const boids: Array<Boid> = [];
-
 const stats = new Stats()
-
-const behaviour: Behaviour = new PointDirectedBehaviour()
+const BOID_AMOUNT: number = 1
+// const behaviour: Behaviour = new PointDirectedBehaviour()
+const behaviour: Behaviour = new CentrifugalBehaviour()
 
 const TheePage: React.FunctionComponent<FlockProps> = () => {
     Geometry.init()
@@ -45,20 +45,40 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     
     scene.add(envSphere);
     
-    for(let i = 0; i < 2000; ++i){
+    // for(let i = 0; i < BOID_AMOUNT; ++i){
         const boidMesh = new THREE.Mesh(Geometry.BoidConeGeometry, Material.BoidMaterial);
-        const boid = new Boid()
-        boid.mesh = boidMesh
+        boidMesh.position.addScalar(3)
+
+        const boid = new Boid(boidMesh)
+        boids.pop()
         boids.push(boid)
         scene.add(boidMesh)
-    }
+    // }
 
     //PointSphere
     const s1 = new THREE.SphereBufferGeometry()
     const m1 = new THREE.MeshBasicMaterial({color: 0xffff00})
-    
     const pointSphere = new THREE.Mesh(s1, m1)
     scene.add(pointSphere)
+
+    const boidUp = boidMesh.up.clone()
+    const line1: Line = new Line(boidUp, boidUp.clone().multiplyScalar(2))
+    const line2: Line = new Line(boid.position, boid.target)
+
+    scene.add(line1.getLine(), line2.getLine())
+    
+    // const boidUp = boidMesh.up.clone()
+    // // const points = new Array<Vector3>();
+    // // points.push(boidUp.clone().multiplyScalar(2));
+    // const geometry = new THREE.BufferGeometry();
+    // const points = new Float32Array(2 * 3);
+    // // const bufferAttribute: BufferAttribute = new BufferAttribute()
+    // geometry.addAttribute('position', new THREE.BufferAttribute(points, 3) )//'position', new THREE.BufferAttribute(points, 2));
+
+    // const material = new THREE.LineBasicMaterial({color: 0xffffff, linewidth: 15});
+    // const line = new THREE.Line( geometry, material );
+    // line.
+    // scene.add( line );
 
     const animate = function () {
         requestAnimationFrame( animate );
@@ -79,10 +99,16 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
         
         boid.update()
 
+        line1.update(boid.mesh!.up, boid.mesh!.up.clone().multiplyScalar(2))
+        line2.update(boid.position, boid.target)
+
+        // line.geometry = new THREE.BufferGeometry().setFromPoints([
+        //     boid.mesh!.up, boid.mesh!.up.multiplyScalar(2)]);
+
         if(boid.mesh != null){
             const boidMesh = boid.mesh
             const rotationMatrix = new THREE.Matrix4();
-            rotationMatrix.lookAt(boid.position, boidMesh.position, boidMesh.up);
+            rotationMatrix.lookAt(boid.target, boidMesh.position, boidMesh.up);
     
             const targetQuaternion = new THREE.Quaternion();
     
@@ -94,9 +120,12 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
 
     function initGui(): HTMLElement{
         const gui = new GUI.GUI({autoPlace: false})
-        // const cubeFolder = gui.addFolder("Cube")
-        // cubeFolder.add(point, "x", -15, 15, 0.1)
-        // cubeFolder.open()
+
+        const cubeFolder = gui.addFolder("Cube")
+        cubeFolder.add(boids[0].target, "x", -15, 15, 0.1)
+        cubeFolder.add(boids[0].target, "y", -15, 15, 0.1)
+        cubeFolder.add(boids[0].target, "z", -15, 15, 0.1)
+        cubeFolder.open()
 
         gui.domElement.id = 'scene__gui'
         return gui.domElement;
