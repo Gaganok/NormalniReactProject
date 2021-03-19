@@ -47,7 +47,7 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     
     // for(let i = 0; i < BOID_AMOUNT; ++i){
         const boidMesh = new THREE.Mesh(Geometry.BoidConeGeometry, Material.BoidMaterial);
-        boidMesh.position.addScalar(3)
+        // boidMesh.position.add(Scalar(3))
 
         const boid = new Boid(boidMesh)
         boids.pop()

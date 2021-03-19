@@ -15,9 +15,14 @@ class Boid{
     constructor(mesh: Mesh); 
     constructor(mesh?: Mesh){
         if(mesh != null){
-            this.position = mesh.position
             this.mesh = mesh
-            this.target = new Vector3(2, 2, 0)
+            this.position = mesh.position
+
+            const pos = new Vector3(2, 2, 0)
+
+            this.target = new Vector3(0, 0, 2)//pos
+            mesh.position.set(2, 2, 0)
+            this.position = pos
             // this.target = mesh.position.clone().addScalar(1)
             // this.position.
         }
@@ -30,9 +35,11 @@ class Boid{
         const distance = this.position.distanceTo(this.target) + 0.00001
 
         // this.maxSpeed.subScalar(distance / this.maxSpeed.x)
-        const maxSpeedArrival = this.maxSpeed.clone()
-        .subScalar(this.maxSpeed.x / distance)
+        // const maxSpeedArrival = this.maxSpeed.clone()
+        // .subScalar(this.maxSpeed.x / distance)
         // .clamp(new Vector3(), this.maxSpeed)
+
+        const maxSpeedArrival = this.maxSpeed.clone()
 
         acceleration
         .normalize()
