@@ -121,11 +121,12 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     function initGui(): HTMLElement{
         const gui = new GUI.GUI({autoPlace: false})
 
-        const cubeFolder = gui.addFolder("Cube")
-        cubeFolder.add(boids[0].target, "x", -15, 15, 0.1)
-        cubeFolder.add(boids[0].target, "y", -15, 15, 0.1)
-        cubeFolder.add(boids[0].target, "z", -15, 15, 0.1)
-        cubeFolder.open()
+        const worldFolder = gui.addFolder("World")
+        worldFolder.add(World, "centripetalForce", 0, 0.3, 0.01)
+        worldFolder.add(World, "refractionDistance", -15, 15, 0.1)
+        worldFolder.add(World, "maxSpeed", 0, 5, 0.01)
+        worldFolder.add(World, "maxForce", 0, 1, 0.01)
+        worldFolder.open()
 
         gui.domElement.id = 'scene__gui'
         return gui.domElement;
