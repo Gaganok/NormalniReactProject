@@ -15,6 +15,12 @@ export default class BoidUtils{
         return intersection != null ? intersection.point : new Vector3()
     }
 
+    static random(min: number, max: number) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
     private static getIntersection(position: Vector3, direction: Vector3): THREE.Intersection{
         const raycaster = new THREE.Raycaster(position, direction);
         const intersects = raycaster.intersectObject(World.envSphere);

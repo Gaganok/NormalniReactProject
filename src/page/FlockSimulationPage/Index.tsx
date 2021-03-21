@@ -14,14 +14,16 @@ import PointDirectedBehaviour from './model/PointDirectedBehaviour';
 import Stats from 'stats.js';
 import CentrifugalBehaviour from './model/CentrifugalBehaviour';
 import Line from './model/Line';
+import FlockingBehaviour from './model/FlockingBehaviour';
 
 export interface FlockProps {}
 
 const boids: Array<Boid> = [];
 const stats = new Stats()
-const BOID_AMOUNT: number = 1
+
 // const behaviour: Behaviour = new PointDirectedBehaviour()
 const behaviour: Behaviour = new CentrifugalBehaviour()
+const flocking: FlockingBehaviour = new FlockingBehaviour(boids)
 
 const TheePage: React.FunctionComponent<FlockProps> = () => {
     Geometry.init()
@@ -29,7 +31,7 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     const scene = new THREE.Scene();
     
     const camera = new THREE.PerspectiveCamera( 75, (window.innerWidth) / (window.innerHeight), 0.1, 1000 );
-    camera.position.z = 25;
+    camera.position.z = 75;
     
     const renderer = new THREE.WebGLRenderer();
 
@@ -45,15 +47,15 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     
     scene.add(envSphere);
     
-    // for(let i = 0; i < BOID_AMOUNT; ++i){
+    for(let i = 0; i < World.boidAmount; ++i){
         const boidMesh = new THREE.Mesh(Geometry.BoidConeGeometry, Material.BoidMaterial);
         // boidMesh.position.add(Scalar(3))
 
         const boid = new Boid(boidMesh)
-        boids.pop()
+        // boids.pop()
         boids.push(boid)
         scene.add(boidMesh)
-    // }
+    }
 
     //PointSphere
     const s1 = new THREE.SphereBufferGeometry()
@@ -61,24 +63,6 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
     const pointSphere = new THREE.Mesh(s1, m1)
     scene.add(pointSphere)
 
-    const boidUp = boidMesh.up.clone()
-    const line1: Line = new Line(boidUp, boidUp.clone().multiplyScalar(2))
-    const line2: Line = new Line(boid.position, boid.target)
-
-    scene.add(line1.getLine(), line2.getLine())
-    
-    // const boidUp = boidMesh.up.clone()
-    // // const points = new Array<Vector3>();
-    // // points.push(boidUp.clone().multiplyScalar(2));
-    // const geometry = new THREE.BufferGeometry();
-    // const points = new Float32Array(2 * 3);
-    // // const bufferAttribute: BufferAttribute = new BufferAttribute()
-    // geometry.addAttribute('position', new THREE.BufferAttribute(points, 3) )//'position', new THREE.BufferAttribute(points, 2));
-
-    // const material = new THREE.LineBasicMaterial({color: 0xffffff, linewidth: 15});
-    // const line = new THREE.Line( geometry, material );
-    // line.
-    // scene.add( line );
 
     const animate = function () {
         requestAnimationFrame( animate );
@@ -96,11 +80,13 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
         if(behaviour.updateTarget(boid)){
             // pointSphere.position.multiplyScalar(0).add(boid.target)
         }
+
+        flocking.updateFlocking(boid)
         
         boid.update()
 
-        line1.update(boid.mesh!.up, boid.mesh!.up.clone().multiplyScalar(2))
-        line2.update(boid.position, boid.target)
+        // line1.update(boid.mesh!.up, boid.mesh!.up.clone().multiplyScalar(2))
+        // line2.update(boid.position, boid.target)
 
         // line.geometry = new THREE.BufferGeometry().setFromPoints([
         //     boid.mesh!.up, boid.mesh!.up.multiplyScalar(2)]);
@@ -127,6 +113,13 @@ const TheePage: React.FunctionComponent<FlockProps> = () => {
         worldFolder.add(World, "maxSpeed", 0, 5, 0.01)
         worldFolder.add(World, "maxForce", 0, 1, 0.01)
         worldFolder.open()
+
+        const flockFolder = gui.addFolder("Flock")
+        flockFolder.add(World, "flockCohesion", 0, 5, 0.1)
+        flockFolder.add(World, "flockSeparation", 0, 5, 0.1)
+        flockFolder.add(World, "flockAlignment", 0, 5, 0.1)
+        flockFolder.add(World, "flockRadius", 0, 20, 1)
+        flockFolder.open()
 
         gui.domElement.id = 'scene__gui'
         return gui.domElement;
